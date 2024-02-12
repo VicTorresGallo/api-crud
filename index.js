@@ -4,54 +4,88 @@ const port = process.env.PORT || 3000;
 
 const express = require('express');
 const logger = require('morgan');
+const mongojs = require('mongojs');
 
 const app = express();
-    //middlewares
-    app.use(logger('dev'));
-    app.use(express.urlencoded({ extended: false }));
-    app.use(express.json());
-    //añadir el método get para obtener el parametro
 
-    app.get('/api/product', (req, res) => {
-        res.status(200).send({ productos: []});
+var db = mongojs("SD"); // Enlazamos con la DB "SD"
+var id = mongojs.ObjectID; // Función para convertir un id textual en un objectID
+
+//middlewares
+app.use(logger('dev'));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+// añadimos un trigger previo a las rutas para dar soporte a múltiples colecciones
+app.param("coleccion", (req, res, next, coleccion) => {
+    console.log('param /api/:coleccion');
+    console.log('colección: ', coleccion);
+
+    req.collection = db.collection(coleccion);
+    return next();
+});
+
+//añadir el método get para obtener el parametro
+
+app.get('/api', (req, res, next) => {
+    console.log('GET /api');
+    console.log(req.collection);
+    db.getCollectionNames((err, colecciones) => {
+        if (err) return next(err);
+        res.json(colecciones);
     });
-    app.get('/api/product/:productID', (req, res) => {
-        const productID = req.params.productID;
-        res.status(200).send({ product: productID});
+});
+
+app.get('/api/:coleccion', (req, res, next) => {
+    req.collection.find((err, coleccion) => {
+        if (err) return next(err);
+        res.json(coleccion);
     });
-    app.post('/api/product', (req, res) => {
-        const queProducto = req.body;
-        console.log(queProducto);
-        res.status(200).send({ 
-            mensaje:'producto creado',
-            producto:queProducto
-        });
+});
+
+app.get('/api/:coleccion/:id', (req, res, next) => {
+    req.collection.findOne({ _id: id(req.params.id) }, (err, elemento) => {
+        if (err) return next(err);
+        res.json(elemento);
     });
+});
 
-    app.put('/api/product/:productID',(req,res) => {
-        const queProducto = req.body;
-        const productID = req.params.productID;
-
-        res.status(200).send({
-            mensaje: `Se ha modificado el producto ${productID}`,
-            producto: queProducto
+app.post('/api/:coleccion', (req, res, next) => {
+    const elemento = req.body;
+    if (!elemento.nombre) {
+        res.status(400).json({
+            error: 'Bad data',
+            description: 'Se precisa al menos un campo <nombre>'
         });
+    } else {
+        req.collection.save(elemento, (err, coleccionGuardada) => {
+            if (err) return next(err);
+            res.json(coleccionGuardada);
+        });
+    }
+});
+
+app.put('/api/:coleccion/:id', (req, res, next) => {
+    const elementoId = req.params.id;
+    const elementoNuevo = req.body;
+    req.collection.update(
+        { _id: id(elementoId) },
+        { $set: elementoNuevo },
+        { safe: true, multi: false },
+        (err, elementoModif) => {
+            if (err) return next(err);
+            res.json(elementoModif);
     });
+});
 
-    app.delete('/api/product/:productID', (req, res) => {
-        const productID = req.params.productID;
-        res.status(200);
-        res.send( { mensaje: `Se ha eliminado el producto ${productID}` } );
-        });
+app.delete('/api/:coleccion/:id', (req, res, next) => {
+    const elementoId = req.params.id;
+    req.collection.remove({ _id: id(elementoId) }, (err, resultado) => {
+        if (err) return next(err);
+        res.json(resultado);
+    });
+});
 
-    /*app.delete('/api/product/:productID', (req,res) => {
-        const productID = req.params.productID;
-        req.status(200).send({
-            mensaje:'se ha eliminado el producto ${productID}'
-        });
-    });*/
-
-    //listener
-    app.listen(port, () => {
-        console.log(`API REST ejecutándose en http://localhost:${port}/api/product`);
-    }); 
+//ejecuta el codigo
+app.listen(port, () => {
+    console.log(`API REST ejecutándose en http://localhost:${port}/api/product`);
+}); 
