@@ -13,6 +13,8 @@ Verbo HTTP | Ruta | Descripción
 <span style="color:blue">PUT</span> | /api/\{coleccion\}/\{id\} | Modificamos el elemento \{id\} de la tabla \{coleccion\}.
 <span style="color:red">DELETE</span> | /api/\{coleccion\}/\{id\} | Eliminamos el elemento \{id\} de la tabla \{coleccion\}.
 
+
+
 ## Comenzando 🚀
 
 _Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
@@ -56,9 +58,11 @@ cd api-rest
 npm i
 ```
 
-_Para poner el proyecto en marcha, ejecutaremos el siguiente comando:_
+_Para poner el proyecto en marcha, ejecutaremos los siguientes comandos:_
 
 ```sh
+sudo systemctl start mongod
+
 npm start
 ```
 
@@ -68,29 +72,247 @@ _El archivo `CRUD_postman_collection.json` contiene una colección de pruebas pa
 
 _Para poder emplearlo desde **Postman**, bastará con importar el archivo y, si fuera necesario, modificar el puerto de escucha del servidor._
 
-<!-- ## Ejecutando las pruebas ⚙️
+## Ejecutando las pruebas ⚙️
 
-_Explica cómo ejecutar las pruebas automatizadas para este sistema._
+_Se sube la coleecion a postman y se ejecutan las peticiones_
 
 ### Analice las pruebas end-to-end 🔩
 
-_Explica qué verifican estas pruebas y por qué_
 
+# Authentication
+  El token de autenticación es '1234'
+
+## GET Devuelve api completa
+
+GET /api
+
+> Response Examples
+
+> Success
+
+```json
+[
+  "mascotas",
+  "familia"
+]
 ```
-Proporciona un ejemplo
+
+### Responses
+
+|HTTP Status Code |Meaning|Description|Data schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Success|Inline|
+
+## GET Devuelve Mascotas
+
+GET /api/mascotas
+
+> Response Examples
+
+> Success
+
+```json
+[
+  {
+    "_id": "63f3870fb83d6cbd2740df41",
+    "Tipo": "gato",
+    "nombre": "nana",
+    "edad": "8"
+  },
+  {
+    "_id": "65dca522aa9c0b0fdac620cb",
+    "tipo": "Perro",
+    "nombre": "toby",
+    "edad": "4"
+  },
+  {
+    "_id": "65e356ff24f6f50fbac91002",
+    "tipo": "loro",
+    "nombre": "lychee",
+    "edad": "1"
+  },
+  {
+    "_id": "65e3570b24f6f50fbac91003",
+    "tipo": "gato",
+    "nombre": "kella",
+    "edad": "13"
+  },
+  {
+    "_id": "65e3572c24f6f50fbac91004",
+    "tipo": "gato",
+    "nombre": "megatron",
+    "edad": "1"
+  }
+]
 ```
 
-### Y las pruebas de estilo de codificación ⌨️
+### Responses
 
-_Explica qué verifican estas pruebas y por qué_
+|HTTP Status Code |Meaning|Description|Data schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Success|Inline|
 
+## POST Crea en mascotas
+
+POST /api/mascotas
+
+> Body Parameters
+
+```json
+{
+  "tipo": "loro",
+  "nombre": "lychee",
+  "edad": "1"
+}
 ```
-Proporciona un ejemplo
-``` -->
+
+### Params
+
+|Name|Location|Type|Required|Description|
+|---|---|---|---|---|
+|token|header|string| yes |none|
+|body|body|object| no |none|
+|» tipo|body|string| yes |none|
+|» nombre|body|string| yes |none|
+|» edad|body|string| yes |none|
+
+> Response Examples
+
+> Success
+
+```json
+{
+  "result": "NO",
+  "msg": "Envía un código válido en la cabecera 'token'"
+}
+```
+
+```json
+{
+  "tipo": "gato",
+  "nombre": "megatron",
+  "edad": "1",
+  "_id": "65e373dae4ef7d25aa23b102"
+}
+```
+
+### Responses
+
+|HTTP Status Code |Meaning|Description|Data schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Success|Inline|
+
+## GET Devuelve un Item
+
+GET /api/mascotas/63f3870fb83d6cbd2740df41
+
+> Response Examples
+
+> Success
+
+```json
+{
+  "_id": "65e3572c24f6f50fbac91004",
+  "tipo": "gato",
+  "nombre": "megatron",
+  "edad": "1"
+}
+```
+
+### Responses
+
+|HTTP Status Code |Meaning|Description|Data schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Success|Inline|
+
+## DELETE Borra un Item
+
+DELETE /api/mascotas/63f3870fb83d6cbd2740df41
+
+### Params
+
+|Name|Location|Type|Required|Description|
+|---|---|---|---|---|
+|token|header|string| yes |none|
+
+> Response Examples
+
+> Success
+
+```json
+{
+  "result": "NO",
+  "msg": "Envía un código válido en la cabecera 'token'"
+}
+```
+
+```json
+{
+  "n": 1,
+  "ok": 1,
+  "deletedCount": 1
+}
+```
+
+### Responses
+
+|HTTP Status Code |Meaning|Description|Data schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Success|Inline|
+
+## PUT Modifica  familia
+
+PUT /api/familia/63f384826a7948bc68312b12
+
+> Body Parameters
+
+```json
+{
+  "tipo": "Hermano",
+  "nombre": "Ignacio",
+  "edad": "23"
+}
+```
+
+### Params
+
+|Name|Location|Type|Required|Description|
+|---|---|---|---|---|
+|token|header|string| yes |none|
+|body|body|object| no |none|
+|» tipo|body|string| yes |none|
+|» nombre|body|string| yes |none|
+|» edad|body|string| yes |none|
+
+> Response Examples
+
+> Success
+
+```json
+{
+  "result": "NO",
+  "msg": "Envía un código válido en la cabecera 'token'"
+}
+```
+
+```json
+{
+  "n": 1,
+  "nModified": 0,
+  "ok": 1
+}
+```
+
+### Responses
+
+|HTTP Status Code |Meaning|Description|Data schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Success|Inline|
+
 
 ## Despliegue 📦
 
-_Agrega notas adicionales sobre cómo hacer deploy._
+_Para iniciar tendremos que colar el repositorio, iniciar nuestra BD y nuestro Servicio con los comandos previamente mencionados._
 
 ## Construido con 🛠️
 
