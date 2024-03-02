@@ -1,100 +1,38 @@
 {
 	"info": {
-		"_postman_id": "a3678ae3-cbd3-4df5-ab91-3db89bc03217",
+		"_postman_id": "e1a45375-4150-4231-808d-4f8134b6ec44",
 		"name": "DB-SD",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "25697523"
 	},
 	"item": [
 		{
-			"name": "New Request",
-			"request": {
-				"method": "GET",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "New Request",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"name": "Devuelve api completa",
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"tipo\": \"Hermano\",\n    \"nombre\": \"Pepe\",\n    \"edad\": 46\n}\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "http://localhost:3000/api/familia",
-					"protocol": "http",
+					"raw": "https://localhost:3000/api",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"api",
-						"familia"
+						"api"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://localhost:3000/api/familia",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"tipo\": \"Hermano\",\n    \"nombre\": \"Pepe\",\n    \"edad\": 46\n}\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/api/familia",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"familia"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:3000/api/mascotas",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"name": "Devuelve Mascotas",
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"tipo\": \"Hermano\",\n    \"nombre\": \"Pepe\",\n    \"edad\": 46\n}\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "http://localhost:3000/api/mascotas",
-					"protocol": "http",
+					"raw": "https://localhost:3000/api/mascotas",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
@@ -108,22 +46,13 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:3000/api/mascotas/63f38701b83d6cbd2740df40",
+			"name": "Devuelve un Item",
 			"request": {
-				"method": "PUT",
+				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"tipo\": \"Hermano\",\n    \"nombre\": \"Pepe\",\n    \"edad\": 46\n}\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "http://localhost:3000/api/mascotas/63f38701b83d6cbd2740df40",
-					"protocol": "http",
+					"raw": "https://localhost:3000/api/mascotas/63f3870fb83d6cbd2740df41",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
@@ -131,7 +60,105 @@
 					"path": [
 						"api",
 						"mascotas",
-						"63f38701b83d6cbd2740df40"
+						"63f3870fb83d6cbd2740df41"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crea en familia",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "1234",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"tipo\": \"loro\",\n    \"nombre\": \"lychee\",\n    \"edad\": \"1\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:3000/api/mascotas",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"mascotas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modifica  familia",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "1234",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"tipo\": \"Hermano\",\n\"nombre\": \"Ignacio\",\n\"edad\": \"23\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:3000/api/familia/63f384826a7948bc68312b12",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"familia",
+						"63f384826a7948bc68312b12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borra un Item",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "1234",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:3000/api/mascotas/63f3870fb83d6cbd2740df41",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"mascotas",
+						"63f3870fb83d6cbd2740df41"
 					]
 				}
 			},
