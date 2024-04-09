@@ -28,15 +28,25 @@
 		{
 			"name": "Devuelve Mascotas",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NjA3NTg4OWI2YzRlMjBmYjFhMDM5ZjgiLCJpYXQiOjE3MTI2NzU0MjksImV4cCI6MTcxMzM4MTAyOX0.D4TEnMmj6-lwd0kRAexllw_403maT0BHcDRfUMdIUQo",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:3000/api/mascotas",
+					"raw": "https://localhost:4000/api/mascotas",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "4000",
 					"path": [
 						"api",
 						"mascotas"
@@ -48,15 +58,25 @@
 		{
 			"name": "Devuelve un Item",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NjA3NTg4OWI2YzRlMjBmYjFhMDM5ZjgiLCJpYXQiOjE3MTI2NzU0MjksImV4cCI6MTcxMzM4MTAyOX0.D4TEnMmj6-lwd0kRAexllw_403maT0BHcDRfUMdIUQo",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:3000/api/mascotas/63f3870fb83d6cbd2740df41",
+					"raw": "https://localhost:4000/api/mascotas/63f3870fb83d6cbd2740df41",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "4000",
 					"path": [
 						"api",
 						"mascotas",
@@ -67,7 +87,7 @@
 			"response": []
 		},
 		{
-			"name": "Crea en familia",
+			"name": "Crea en mascotas",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -87,12 +107,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:3000/api/mascotas",
+					"raw": "https://localhost:4000/api/mascotas",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "4000",
 					"path": [
 						"api",
 						"mascotas"
@@ -104,6 +124,16 @@
 		{
 			"name": "Modifica  familia",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NjA3NTg4OWI2YzRlMjBmYjFhMDM5ZjgiLCJpYXQiOjE3MTI2NzU0MjksImV4cCI6MTcxMzM4MTAyOX0.D4TEnMmj6-lwd0kRAexllw_403maT0BHcDRfUMdIUQo",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PUT",
 				"header": [
 					{
@@ -122,12 +152,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:3000/api/familia/63f384826a7948bc68312b12",
+					"raw": "https://localhost:4000/api/familia/63f384826a7948bc68312b12",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "4000",
 					"path": [
 						"api",
 						"familia",
@@ -140,6 +170,16 @@
 		{
 			"name": "Borra un Item",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NjA3NTg4OWI2YzRlMjBmYjFhMDM5ZjgiLCJpYXQiOjE3MTI2NzU0MjksImV4cCI6MTcxMzM4MTAyOX0.D4TEnMmj6-lwd0kRAexllw_403maT0BHcDRfUMdIUQo",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [
 					{
@@ -149,12 +189,12 @@
 					}
 				],
 				"url": {
-					"raw": "https://localhost:3000/api/mascotas/63f3870fb83d6cbd2740df41",
+					"raw": "https://localhost:4000/api/mascotas/63f3870fb83d6cbd2740df41",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "4000",
 					"path": [
 						"api",
 						"mascotas",
