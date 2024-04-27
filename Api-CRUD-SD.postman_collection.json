@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "e1a45375-4150-4231-808d-4f8134b6ec44",
-		"name": "DB-SD",
+		"name": "Api-CRUD-SD",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "25697523"
 	},
@@ -26,7 +26,7 @@
 			"response": []
 		},
 		{
-			"name": "Devuelve Mascotas",
+			"name": "Devuelve Tareas",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -87,7 +87,7 @@
 			"response": []
 		},
 		{
-			"name": "Crea en mascotas",
+			"name": "Crea Tarea",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -99,7 +99,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"tipo\": \"loro\",\n    \"nombre\": \"lychee\",\n    \"edad\": \"1\"\n}\n",
+					"raw": "{\n\"title\": \"tareaprueba\",\n\"isDone\": false\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -107,7 +107,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:4000/api/mascotas",
+					"raw": "https://localhost:4000/api/tareas",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -115,14 +115,14 @@
 					"port": "4000",
 					"path": [
 						"api",
-						"mascotas"
+						"tareas"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Modifica  familia",
+			"name": "Modifica  Tareas",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -144,7 +144,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"tipo\": \"Hermano\",\n\"nombre\": \"Ignacio\",\n\"edad\": \"23\"\n}",
+					"raw": "{\n\"title\": \"tareaprueba\",\n\"isDone\": true\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -152,7 +152,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:4000/api/familia/63f384826a7948bc68312b12",
+					"raw": "https://localhost:4000/api/tareas/63f384826a7948bc68312b12",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -160,7 +160,7 @@
 					"port": "4000",
 					"path": [
 						"api",
-						"familia",
+						"tareas",
 						"63f384826a7948bc68312b12"
 					]
 				}
@@ -189,7 +189,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://localhost:4000/api/mascotas/63f3870fb83d6cbd2740df41",
+					"raw": "https://localhost:4000/api/tareas/63f3870fb83d6cbd2740df41",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -197,7 +197,7 @@
 					"port": "4000",
 					"path": [
 						"api",
-						"mascotas",
+						"tareas",
 						"63f3870fb83d6cbd2740df41"
 					]
 				}
